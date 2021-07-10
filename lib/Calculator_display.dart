@@ -8,9 +8,11 @@ class Calculator_display extends StatefulWidget {
     Key? key , 
     Icon_Changer? this.currency_icon ,
     required this.onTap ,
-    required this.amount
+    required this.amount,
+    required this.currentcurrency
     }) : super(key: key);
 
+  final String currentcurrency;
   final currency_icon;
   final Function(int) onTap;
   final int amount;
@@ -23,7 +25,7 @@ class _Calculator_displayState extends State<Calculator_display> {
 
   late TextEditingController _controller;
   final outlineinputborder = OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.grey)
+      borderSide: BorderSide(color: Colors.red)
     );
   double percentage=5.0;
 
@@ -38,6 +40,31 @@ class _Calculator_displayState extends State<Calculator_display> {
   void dispose(){
     _controller.dispose();
     super.dispose();
+  }
+
+  Color getColor(){
+    if(percentage==0.0)
+      return Colors.orange.shade400;
+    else if(percentage==1.0)
+      return Colors.orange;
+    else if(percentage==2.0)
+      return Colors.orange.shade600;
+    else if(percentage==3.0)
+      return Colors.orange.shade700;
+    else if(percentage==4.0)
+      return Colors.orange.shade800;
+    else if(percentage==5.0)
+      return Colors.orange.shade900;
+    else if(percentage==6.0)
+      return Colors.red;
+    else if(percentage==7.0)
+      return Colors.red.shade600;
+    else if(percentage==8.0)
+      return Colors.red.shade700;
+    else if(percentage==9.0)
+      return Colors.red.shade800;
+    else
+      return Colors.red.shade900;
   }
 
   @override
@@ -71,6 +98,8 @@ class _Calculator_displayState extends State<Calculator_display> {
                       enabledBorder: outlineinputborder,
                       focusedBorder: outlineinputborder,
                     ),
+                    cursorWidth: 4.0,
+                    cursorColor: Colors.red.shade600,
                     onChanged: (text) {
                       widget.onTap(int.parse(_controller.text));
                     },
@@ -78,6 +107,7 @@ class _Calculator_displayState extends State<Calculator_display> {
                 ),
               ],
             ),
+            
             SizedBox(height: 30.0,),
             SliderTheme(
               data: SliderTheme.of(context).copyWith(
@@ -99,11 +129,16 @@ class _Calculator_displayState extends State<Calculator_display> {
               ),
             ),
             SizedBox(height: 30.0,),
+            Text(
+              '${percentage} %',
+              style: TextStyle(color: getColor() , fontWeight: FontWeight.bold,fontSize: 30.0),
+            ),
+            SizedBox(height: 30.0,),
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).push(
                  MaterialPageRoute(
-                    builder: (context) => CalculatedScreen(amount: (percentage/100)*widget.amount),
+                    builder: (context) => CalculatedScreen(amount: (percentage/100)*widget.amount , current_currency: widget.currentcurrency,),
                      fullscreenDialog: true,
                   ),
                 );

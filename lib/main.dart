@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   
   List<String> currency = ["INR","USD","EUR","YEN","CAD"];
   Icon_Changer currency_icon=Icon_Changer(current_currency: '');
+  String currentcurrency='₹';
 
   int amount=0;
 
@@ -79,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                         child: InkWell(
                           onTap: () {
                             setState(() {
+                              currentcurrency=currency[index];
                               currency_icon=Icon_Changer(current_currency: currency[index]);
                             });
                           },
@@ -127,6 +129,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                     ),
                     child: Calculator_display(
+                      currentcurrency: currentcurrency,
                       currency_icon: currency_icon,
                       onTap: setAmount,
                       amount: amount,
