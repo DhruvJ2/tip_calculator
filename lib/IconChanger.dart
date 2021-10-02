@@ -8,19 +8,16 @@ class Icon_Changer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    if(current_currency=="USD"){
+    switch(current_currency){
+    case "USD":
      return ImageIcon(AssetImage('assets/dollar.png'),size: 35,color: Colors.yellow[700],);
-    }
-    else if(current_currency=="EUR"){
+    case "EUR":
      return ImageIcon(AssetImage('assets/euro.png'),size: 35,color: Colors.yellow[700],);
-    }
-    else if(current_currency=="YEN"){
+    case "YEN":
      return ImageIcon(AssetImage('assets/yen.png'),size: 35,color: Colors.yellow[700],);
-    }
-    else if(current_currency=="CAD"){
+    case "CAD":
      return ImageIcon(AssetImage('assets/canadian-dollar.png'),size: 35,color: Colors.yellow[700],);
-    }
-    else{
+    default:
       return ImageIcon(AssetImage('assets/rupee.png'),size: 35,color: Colors.yellow[700],);
     }
   }

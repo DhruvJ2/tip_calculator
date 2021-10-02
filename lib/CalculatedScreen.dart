@@ -18,21 +18,33 @@ class CalculatedScreen extends StatefulWidget {
 class _CalculatedScreenState extends State<CalculatedScreen>{
 
   String DisplayCurrency(){
-    if(widget.current_currency=="USD"){
-      return '\$';
+    switch(widget.current_currency){
+      case "USD" :
+        return '\$';
+      case "EUR":
+        return '€';
+      case "YEN":
+        return '¥';
+      case "CAD":
+        return 'C\$';
+      default:
+        return '₹';
     }
-    else if(widget.current_currency=="EUR"){
-      return '€';
-    }
-    else if(widget.current_currency=="YEN"){
-      return '¥';
-    }
-    else if(widget.current_currency=="CAD"){
-      return 'C\$';
-    }
-    else{
-      return '₹';
-    }
+    // if(widget.current_currency=="USD"){
+    //   return '\$';
+    // }
+    // else if(widget.current_currency=="EUR"){
+    //   return '€';
+    // }
+    // else if(widget.current_currency=="YEN"){
+    //   return '¥';
+    // }
+    // else if(widget.current_currency=="CAD"){
+    //   return 'C\$';
+    // }
+    // else{
+    //   return '₹';
+    // }
   }
 
   @override
@@ -54,23 +66,25 @@ class _CalculatedScreenState extends State<CalculatedScreen>{
                     stops: [0.0,1.0],
                   ),
                 ),
-                child:Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        AnimatedTextKit(
-                          totalRepeatCount: 1,
-                          animatedTexts:[
-                            TypewriterAnimatedText(
-                              'Calculated Tip is  ${DisplayCurrency()} ${widget.amount.round()}',
-                              textStyle: TextStyle(fontSize: 25.0,fontFamily:"monospace",color: Colors.white,fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                          pause: const Duration(milliseconds: 1500),
-                          displayFullTextOnTap: true,
-                          stopPauseOnTap: true,
-                        ),
-                      ],
-                    ),
+                child:Center(
+                  child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          AnimatedTextKit(
+                            totalRepeatCount: 1,
+                            animatedTexts:[
+                              TypewriterAnimatedText(
+                                'Calculated Tip is  ${DisplayCurrency()} ${widget.amount.round()}',
+                                textStyle: TextStyle(fontSize: 25.0,fontFamily:"monospace",color: Colors.white,fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                            pause: const Duration(milliseconds: 1500),
+                            displayFullTextOnTap: true,
+                            stopPauseOnTap: true,
+                          ),
+                        ],
+                      ),
+                ),
               ),
             ),
             Positioned(

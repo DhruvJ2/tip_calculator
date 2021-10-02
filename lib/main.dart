@@ -11,7 +11,6 @@ class TipCalculator extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialApp(
       title: 'Tip Calculator',
-      debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
